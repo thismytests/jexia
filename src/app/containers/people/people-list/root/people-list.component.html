@@ -1,0 +1,82 @@
+<app-filters *ngIf="dataSource?.length" (selected)="onChangeFilters($event)"></app-filters>
+
+<div class="delimiter"></div>
+<table mat-table [dataSource]="copyDataSource" class="mat-elevation-z8" *ngIf="copyDataSource?.length">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>
+      {{sortedColumns.name.name}}
+      <span class="custom-icon"  (click)="onSort(sortedColumns.name)">
+        <i class="material-icons" *ngIf="sortedColumns.name.isDesc">
+          keyboard_arrow_down
+        </i>
+        <i class="material-icons" *ngIf="!sortedColumns.name.isDesc">
+          keyboard_arrow_up
+        </i>
+      </span>
+    </th>
+    <td mat-cell *matCellDef="let element"
+        (click)="relocate(element.name)"
+        class="row"> {{element.name}}
+    </td>
+  </ng-container>
+
+  <!-- Gender Column -->
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> {{sortedColumns.gender.name}}
+      <span class="custom-icon"  (click)="onSort(sortedColumns.gender)">
+        <i class="material-icons" *ngIf="sortedColumns.gender.isDesc">
+          keyboard_arrow_down
+        </i>
+        <i class="material-icons" *ngIf="!sortedColumns.gender.isDesc">
+          keyboard_arrow_up
+        </i>
+      </span>
+    </th>
+    <td mat-cell *matCellDef="let element"
+        (click)="relocate(element.name)"
+        class="row">{{element.gender}} </td>
+  </ng-container>
+
+  <!-- Birthday Column -->
+  <ng-container matColumnDef="birthday">
+    <th mat-header-cell *matHeaderCellDef>
+      {{sortedColumns.birthday.name}}
+      <span class="custom-icon"  (click)="onSort(sortedColumns.birthday)">
+        <i class="material-icons" *ngIf="sortedColumns.birthday.isDesc">
+          keyboard_arrow_down
+        </i>
+        <i class="material-icons" *ngIf="!sortedColumns.birthday.isDesc">
+          keyboard_arrow_up
+        </i>
+      </span>
+    </th>
+    <td mat-cell *matCellDef="let element"
+        (click)="relocate(element.name)"
+        class="row">{{element.birthday}} </td>
+  </ng-container>
+
+  <!-- HomePlanet Column -->
+  <ng-container matColumnDef="homePlanet">
+    <th mat-header-cell *matHeaderCellDef>
+      {{sortedColumns.homePlanet.name}}
+      <span class="custom-icon"  (click)="onSort(sortedColumns.homePlanet)">
+        <i class="material-icons" *ngIf="sortedColumns.homePlanet.isDesc">
+          keyboard_arrow_down
+        </i>
+        <i class="material-icons" *ngIf="!sortedColumns.homePlanet.isDesc">
+          keyboard_arrow_up
+        </i>
+      </span>
+    </th>
+    <td mat-cell *matCellDef="let element"
+        (click)="relocate(element.name)"
+        class="row">  {{element.homePlanet}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr class="tbody-row"mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

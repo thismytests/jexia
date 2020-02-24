@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap-grids.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// importing necessary fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+// importing angular materials icons
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// setting @angular/material
+@import '../node_modules/@angular/material/theming';
+@include mat-core();
+
+$custom-theme-primary: mat-palette($mat-gray, 800);
+$custom-theme-accent: mat-palette($mat-gray, A200, A100, A400);
+$custom-theme-warn: mat-palette($mat-gray);
+
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+
+@include angular-material-theme($custom-theme);

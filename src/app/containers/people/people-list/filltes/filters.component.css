@@ -1,0 +1,15 @@
+:host{
+  margin-bottom: 20px;
+}
+.wrapper {
+  display: flex;
+}
+
+.content {
+  margin: auto;
+  width: 100%;
+}
+
+.registration-relocate{
+  padding-top: 20px;
+}

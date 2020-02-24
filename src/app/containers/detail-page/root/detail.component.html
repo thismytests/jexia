@@ -1,0 +1,35 @@
+<app-header-section></app-header-section>
+
+<div style="position: relative; height: 100%">
+  <app-content-section>
+    <div class="row">
+      <div class="col-md-5">
+        <!--planet info-->
+        <app-planet-info [data]="planetInfo" *ngIf="planetInfo"></app-planet-info>
+      </div>
+
+      <div class="col-md-5">
+        <!--person description-->
+        <app-item-description [data]="person"
+                              *ngIf="person">
+
+        </app-item-description>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <!--chart with persons-->
+        <app-detail-chart [nodes]="nodes"
+                          [links]="link"
+                          (selectNode)="onSelectChartItem($event)"
+                          *ngIf="nodes.length && link.length"
+        ></app-detail-chart>
+      </div>
+    </div>
+  </app-content-section>
+
+  <!--spinner-->
+  <app-spinner *ngIf="isShowSpinner"></app-spinner>
+</div>
+

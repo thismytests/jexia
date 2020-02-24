@@ -1,0 +1,17 @@
+.link{
+  cursor: pointer;
+  opacity: 0.5;
+  text-decoration: none;
+  color: white;
+}
+
+.link:hover{
+  opacity: 1;
+}
+
+.filler {
+  flex: 1 1 auto;
+}
+.gap {
+  margin-right: 10px;
+}

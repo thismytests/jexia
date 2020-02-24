@@ -1,0 +1,25 @@
+$spin-color: "";
+$spin-margin: "";
+
+
+:host {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.spinner-wrapper{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  background: #dcdcdc5e;
+}
+
+.spinner{
+  display: inline;
+  margin: 0 auto;
+}
