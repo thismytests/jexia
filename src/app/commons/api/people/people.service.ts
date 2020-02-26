@@ -27,40 +27,31 @@ export class PeopleService {
   }
 
   getPeople(): Observable<Array<Human>> {
-    let counter = 0
-
-    const subs: Subject<any> = new Subject<any>();
-
+    const subject: BehaviorSubject<any> = new BehaviorSubject<any>(true);
     let newUrl = this.url;
-
     const arr: Array<Human> = [];
 
-    return interval(1000).pipe(
-      mergeMap(data => {
+    return subject.pipe(
+      mergeMap(() => {
         return this.httpClient.get(newUrl, {
           headers: {
             'Content-Type': 'application/json'
           }
         }).pipe(
-          tap((val: People) => {newUrl = val.next}),
-          tap(val => {
+          map((val: People) => {
             if (val.next) {
-              subs.next(true);
+              newUrl = val.next;
+              subject.next(true);
               arr.push(...val.results);
             }
-          }),
-          map((val: People) => {
+
             return arr;
           }),
-          tap(val => console.log('val', val)),
-          takeUntil(subs),
-
           catchError(err => {
             return err;
           })
         ) as Observable<any>;
       })
-
     );
   }
 
