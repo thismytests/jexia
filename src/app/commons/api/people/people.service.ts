@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 // rxjs
-import {from, Observable} from 'rxjs';
+import {BehaviorSubject, from, interval, Observable, Subject, timer} from 'rxjs';
 
 import {
   catchError,
   map,
-  mergeMap,
-  switchMap,
+  mergeMap, repeat, scan,
+  switchMap, takeUntil, tap,
   toArray,
 } from 'rxjs/operators';
 
@@ -27,23 +27,41 @@ export class PeopleService {
   }
 
   getPeople(): Observable<Array<Human>> {
-    return this.httpClient.get(this.url, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).pipe(
-      mergeMap((event1: People) => {
-        return this.httpClient.get(event1.next)
-          .pipe(
-            map((event2: People) => {
-              return [...event1.results, ...event2.results];
-            })
-          );
-      }),
-      catchError(data => {
-        return data;
+    let counter = 0
+
+    const subs: Subject<any> = new Subject<any>();
+
+    let newUrl = this.url;
+
+    const arr: Array<Human> = [];
+
+    return interval(1000).pipe(
+      mergeMap(data => {
+        return this.httpClient.get(newUrl, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).pipe(
+          tap((val: People) => {newUrl = val.next}),
+          tap(val => {
+            if (val.next) {
+              subs.next(true);
+              arr.push(...val.results);
+            }
+          }),
+          map((val: People) => {
+            return arr;
+          }),
+          tap(val => console.log('val', val)),
+          takeUntil(subs),
+
+          catchError(err => {
+            return err;
+          })
+        ) as Observable<any>;
       })
-    ) as Observable<Array<Human>>;
+
+    );
   }
 
   getPerson(name: string): Observable<Human | any> {
