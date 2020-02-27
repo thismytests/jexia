@@ -4,11 +4,13 @@ import {RouterModule} from '@angular/router';
 
 // components
 import {PeopleListComponent} from './root/people-list.component';
+import {PersonsModule} from './persons';
 
 // @angular-material
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {FiltersModule} from './filltes';
+
 
 @NgModule({
   declarations: [PeopleListComponent],
@@ -19,7 +21,10 @@ import {FiltersModule} from './filltes';
     // material
     MatTableModule,
     MatIconModule,
-    FiltersModule
+
+    // children
+    FiltersModule,
+    PersonsModule
   ],
   exports: [PeopleListComponent]
 })
