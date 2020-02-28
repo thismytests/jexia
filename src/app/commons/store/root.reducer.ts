@@ -8,7 +8,6 @@ import {
 
 // reducers
 import {createExampleReducer} from './example/example.reducer';
-import {createAuthReducer} from './auth';
 
 export const rootReducer = composeReducers(
   defaultFormReducer(),
@@ -17,6 +16,5 @@ export const rootReducer = composeReducers(
 
     // example
     example: createExampleReducer(),
-    auth: createAuthReducer()
   })
 );

@@ -20,23 +20,38 @@ import {rootReducer} from './root.reducer';
 
 // types
 import {IApplication} from './store.types';
-import {AuthActionService} from './auth';
+import {PeopleServiceModule} from '../api/people';
+import {EffectsModule} from '@ngrx/effects';
+import {PeopleEffectsService} from './example/people-effects.service';
 
 @NgModule({
   imports: [
+    // store
     NgReduxModule,
-    NgReduxRouterModule
+    NgReduxRouterModule.forRoot(),
+
+    //  api
+    PeopleServiceModule,
+
+    //  side effects
+    EffectsModule.forRoot([
+      PeopleEffectsService
+    ])
   ],
   providers: [
     ExampleActionService,
-    AuthActionService
+
+    // sideeffects
+    PeopleEffectsService
+
   ]
 })
 export class StoreModule {
   //  todo ... must be refactoring!!!
 
   constructor(public store: NgRedux<IApplication>,
-              devTools: DevToolsExtension) {
+              devTools: DevToolsExtension,
+              ngReduxRouter: NgReduxRouter) {
     store.configureStore(
       rootReducer,
       {},
@@ -47,7 +62,7 @@ export class StoreModule {
     );
 
     // Enable syncing of Angular router state with our Redux store.
-    // ngReduxRouter.initialize();
+    ngReduxRouter.initialize();
 
     // Enable syncing of Angular form state with our Redux store.
     provideReduxForms(store);
