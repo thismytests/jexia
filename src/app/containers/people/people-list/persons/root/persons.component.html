@@ -1,3 +1,10 @@
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="paginator($event)">
+</mat-paginator>
+
+
 <table mat-table [dataSource]="copyDataSource" class="mat-elevation-z8" *ngIf="copyDataSource?.length">
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->

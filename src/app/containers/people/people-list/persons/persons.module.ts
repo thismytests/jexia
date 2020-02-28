@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {PersonsComponent} from './root/persons.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
 
     // material
     MatTableModule,
-    MatIconModule, // material
+    MatIconModule,
+    MatPaginatorModule// material
   ],
   declarations: [
     PersonsComponent,

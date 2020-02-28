@@ -5,6 +5,7 @@ import {
   Output, SimpleChanges
 } from '@angular/core';
 import {Router} from '@angular/router';
+import {PageEvent} from '@angular/material/paginator';
 
 export interface PeopleListData {
   name: string;
@@ -24,13 +25,10 @@ interface Column {
   styleUrls: ['./persons.component.scss']
 })
 export class PersonsComponent implements OnChanges {
-  constructor(public router: Router) {
-  }
-
-  @Input() dataSource = null;
+  @Input() dataSource: Array<PeopleListData> = null;
   @Output() sortBy;
 
-  copyDataSource = null;
+  copyDataSource: Array<PeopleListData> = null;
 
   displayedColumns: string[] = ['name', 'gender', 'birthday', 'homePlanet'];
 
@@ -40,6 +38,27 @@ export class PersonsComponent implements OnChanges {
     birthday: {name: 'birthday', isDesc: false},
     homePlanet: {name: 'homePlanet', isDesc: false},
   };
+
+  // MatPaginator Inputs
+  length = 0;
+  pageSize = 0;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageIndex = 0;
+
+  constructor(public router: Router) {
+  }
+
+
+  recountItems(skipCount) {
+    return this.dataSource
+      .slice()
+      .splice(0, skipCount);
+  }
+
+  paginator(event: PageEvent) {
+    const skip = event.pageSize;
+    this.copyDataSource = this.recountItems(skip);
+  }
 
   relocate(name: string): void {
     this.router.navigate([`/detail/${name}`]);
@@ -64,5 +83,14 @@ export class PersonsComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.copyDataSource = changes.dataSource.currentValue.slice();
+    this.length = this.copyDataSource.length;
+    this.pageSize = this.length;
+
+    this.paginator({
+      pageSize: this.pageSize,
+      previousPageIndex: this.pageSize,
+      length: this.length,
+      pageIndex: this.pageIndex
+    });
   }
 }

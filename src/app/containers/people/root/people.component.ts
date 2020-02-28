@@ -7,8 +7,12 @@ import {
 // api
 import {PeopleService} from 'app/commons/api/people';
 
-// containers
-import {PeopleListData} from 'prototype/containers/people/people-list/root/people-list.component';
+export interface PeopleListData {
+  name: string;
+  gender: string;
+  birthday: string;
+  homePlanet: string;
+}
 
 // types
 import {Human} from 'app/commons/api/people/types';
