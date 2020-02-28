@@ -16,7 +16,9 @@ export interface PeopleListData {
 
 // types
 import {Human} from 'app/commons/api/people/types';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {ExampleActionService} from '../../../commons/store/example';
+import {select} from '@angular-redux/store';
 
 @Component({
   selector: 'app-people',
@@ -24,11 +26,22 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./people.component.scss']
 })
 export class PeopleComponent implements OnInit, OnDestroy {
+  @select(['example', 'counter']) readonly counter: Observable<number>;
+
   isShowSpinner = true;
   peopleListData: PeopleListData[] = [];
   peopleServiceSubs: Subscription = null;
 
-  constructor(public peopleService: PeopleService) {
+  constructor(public peopleService: PeopleService,
+              public exampleActionService: ExampleActionService) {
+  }
+
+  incrementStore() {
+    this.exampleActionService.makeIncrement();
+  }
+
+  decrementStore() {
+    this.exampleActionService.makeDecrement();
   }
 
 
@@ -36,7 +49,9 @@ export class PeopleComponent implements OnInit, OnDestroy {
     this.peopleServiceSubs = this.peopleService.getPeople()
       .pipe()
       .subscribe((data) => {
-        if(data === null) return;
+        if (data === null) {
+          return;
+        }
         this.peopleListData = this.dataConvectorForList(data);
         this.isShowSpinner = false;
       });

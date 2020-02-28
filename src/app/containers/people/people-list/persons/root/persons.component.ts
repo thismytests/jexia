@@ -89,7 +89,7 @@ export class PersonsComponent implements OnChanges {
 
     this.paginator({
       pageSize: this.pageSize,
-      previousPageIndex: this.pageSize,
+      previousPageIndex: 0,
       length: this.length,
       pageIndex: this.pageIndex
     });

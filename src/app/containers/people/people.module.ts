@@ -16,6 +16,7 @@ import {PeopleServiceModule} from 'app/commons/api/people';
 // children
 import {PeopleListModule} from 'app/containers/people/people-list';
 import {SpinnerModule} from 'app/commons/components/spinner';
+import {StoreModule} from '../../commons/store';
 
 @NgModule({
   declarations: [PeopleComponent],
@@ -37,7 +38,8 @@ import {SpinnerModule} from 'app/commons/components/spinner';
     // children
     PeopleListModule,
 
-    SpinnerModule
+    SpinnerModule,
+    StoreModule
   ]
 })
 export class PeopleModule {

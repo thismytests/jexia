@@ -1,3 +1,9 @@
+<div>
+  <button mat-raised-button (click)="incrementStore()">Increment</button>
+  <button mat-raised-button (click)="decrementStore()">Decrement</button>
+  <div>result is : {{counter | async}}</div>
+</div>
+
 <app-header-section></app-header-section>
 
 <div style="position: relative; height: 100%">

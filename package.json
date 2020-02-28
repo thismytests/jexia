@@ -15,6 +15,9 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-redux/form": "^10.0.0",
+    "@angular-redux/router": "^10.0.0",
+    "@angular-redux/store": "^10.0.0",
     "@angular/animations": "~9.0.2",
     "@angular/cdk": "^9.0.1",
     "@angular/common": "~9.0.2",
@@ -27,6 +30,7 @@
     "@angular/router": "~9.0.2",
     "bootstrap": "^4.4.1",
     "d3": "4.11.0",
+    "redux": "4.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -50,6 +54,7 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
+    "redux-devtools-extension": "^2.13.8",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.7.5"
