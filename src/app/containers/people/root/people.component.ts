@@ -36,6 +36,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
     this.peopleServiceSubs = this.peopleService.getPeople()
       .pipe()
       .subscribe((data) => {
+        if(data === null) return;
         this.peopleListData = this.dataConvectorForList(data);
         this.isShowSpinner = false;
       });

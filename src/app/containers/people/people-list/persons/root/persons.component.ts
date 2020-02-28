@@ -57,6 +57,7 @@ export class PersonsComponent implements OnChanges {
 
   paginator(event: PageEvent) {
     const skip = event.pageSize;
+    console.log(`event`, event);
     this.copyDataSource = this.recountItems(skip);
   }
 

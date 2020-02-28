@@ -31,7 +31,9 @@ export class PeopleService {
     let newUrl = this.url;
     const arr: Array<Human> = [];
 
-    return subject.pipe(
+    const returnedSubject: Subject<any> = new Subject<any>();
+
+    subject.pipe(
       mergeMap(() => {
         return this.httpClient.get(newUrl, {
           headers: {
@@ -39,10 +41,14 @@ export class PeopleService {
           }
         }).pipe(
           map((val: People) => {
+            console.log(``, val.next);
             if (val.next) {
               newUrl = val.next;
               subject.next(true);
               arr.push(...val.results);
+
+            } else {
+              returnedSubject.next(arr);
             }
 
             return arr;
@@ -52,7 +58,9 @@ export class PeopleService {
           })
         ) as Observable<any>;
       })
-    );
+    ).subscribe();
+
+    return returnedSubject;
   }
 
   getPerson(name: string): Observable<Human | any> {
