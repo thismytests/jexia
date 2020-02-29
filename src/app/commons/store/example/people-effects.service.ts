@@ -1,11 +1,17 @@
 import {Injectable} from '@angular/core';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {ActionsTypes} from './example.action.service';
-import {PeopleService} from '../../api/people';
-import {of} from 'rxjs';
 
-import {Actions, createEffect, Effect} from '@ngrx/effects';
-import {ExampleState} from './example.types';
+// rxjs
+import {
+  switchMap,
+  tap
+} from 'rxjs/operators';
+import {PeopleService} from '../../api/people';
+
+import {
+  Actions,
+  createEffect,
+  Effect
+} from '@ngrx/effects';
 
 @Injectable({
   providedIn: 'root'

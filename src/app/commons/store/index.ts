@@ -1,1 +1,1 @@
-export {StoreModule} from './store.module';
+export {CustomStoreModule} from './custom-store.module';

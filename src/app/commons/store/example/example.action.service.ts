@@ -1,35 +1,33 @@
 import {Injectable} from '@angular/core';
 
-// redux
-import {NgRedux} from '@angular-redux/store';
+// rxjs
+import {
+  createAction,
+  props,
+  Store
+} from '@ngrx/store';
 
-// types
-import {ExampleAction} from './example.types';
+// constants
+import {ActionsTypes} from './types.constants';
 
-export class ActionsTypes {
-  static readonly INCREMENT = 'Example/INCREMENT';
-  static readonly DECREMENT = 'Example/DECREMENT';
-}
+export const IncrementExampleAction = createAction(
+  ActionsTypes.INCREMENT,
+);
 
 @Injectable()
 export class ExampleActionService {
 
-  constructor(private redux: NgRedux<any>) {
+  constructor(private store: Store<any>) {
   }
 
   makeIncrement() {
-    const action: ExampleAction = {
-      type: ActionsTypes.INCREMENT
-    };
-
-    this.redux.dispatch(action);
+    this.store.dispatch(IncrementExampleAction());
   }
 
   makeDecrement() {
-    const action: ExampleAction = {
-      type: ActionsTypes.DECREMENT
-    };
-
-    this.redux.dispatch(action);
+    createAction(
+      ActionsTypes.DECREMENT,
+      props<{ payload: any }>()
+    );
   }
 }
